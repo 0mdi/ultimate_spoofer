@@ -1,0 +1,96 @@
+#pragma once
+#include <ntdef.h>
+#include <ntstatus.h>
+
+#include <pshpack1.h>
+struct driver_args_t
+{
+	UINT32 MmAllocateIndependentPages = 0;
+	UINT32 PiDDBLock = 0;
+	UINT32 PiDDBCacheTable = 0;
+	UINT32 DirectoryTableBase = 0;
+	UINT32 UserDirectoryTableBase = 0;
+	UINT32 g_KernelHashBucketList = 0;
+	UINT32 g_HashCacheLock = 0;
+	UINT32 KseEngine = 0;
+	UINT32 SrbShim = 0;
+	UINT32 DeviceIdShim = 0;
+	UINT32 ATADeviceIdShim = 0;
+	UINT32 SrbShimHookDeviceControl = 0;
+	UINT32 DeviceIdShimHookDeviceControl = 0;
+	UINT32 ATADeviceIdShimHookDeviceControl = 0;
+	UINT32 RaDriverDeviceControlIrp = 0;
+	UINT32 WmipInUseRegEntryHead = 0;
+	UINT32 SrbShimStorageAdapterPropertyCompletionHook = 0;
+	UINT32 DeviceIdShimStorageDeviceIdCompletionHook = 0;
+	UINT32 KseSetCompletionHook = 0;
+	//UINT32 ndisDummyIrpHandler = 0;
+	UINT8  SpoofHash[16];
+};
+#include <poppack.h>
+constexpr auto args_size = sizeof(driver_args_t);
+
+class globals
+{
+private:
+	static globals inst;
+
+public:
+	static globals& instance()
+	{
+		return inst;
+	}
+
+	UNICODE_STRING driver_name;
+	driver_args_t args;
+	UINT64 driver_base;
+	UINT32 driver_size;
+};
+
+enum DRIVER_STATUS : NTSTATUS
+{
+	SUCCESS = STATUS_IN_PAGE_ERROR,
+	ALREADY_LOADED,
+	NTOS_IMPORT_ERROR,
+	INIT_DATA_ERROR,
+	PIDDB_INIT_ERROR,
+	PIDDB_CLEAN_ERROR,
+	HASHBUCKET_ERROR,
+	STORNVME_DRIVER_OBJECT_NOT_FOUND,
+	STORAHCI_DRIVER_OBJECT_NOT_FOUND, 
+	PARTMGR_DRIVER_OBJECT_NOT_FOUND,
+	STORPORT_NOT_FOUND,
+	STORPORT_PATTERN_NOT_FOUND,
+	STORPORT_SHIM_NOT_FOUND,
+	SHIM_UNREGISTER_FAILED,
+	STORPORT_QWORD_NOT_FOUND,
+	STEALTHMEM_ALLOC_FAILED,
+	INVALID_CTX_MAGIC,
+	INIT_CONTEXT_FAILED,
+	KSE_ENGINE_NOT_FOUND,
+	KSE_UNREGISTER_FAILED,
+	NTOS_NOT_FOUND,
+	RAID_UNIT_NOT_FULLY_SPOOFED,
+	RAID_UNIT_ALLOC_FAILED,
+	RAID_STORAHCI_LIST_ERROR,
+	RAID_STORAHCI_DEVICES_ERROR,
+	NDIS_NOT_FOUND,
+	NDIS_PDB_ERROR,
+	NDIS_FILTER_NOT_FOUND,
+	NDIS_FILTER_NOT_FOUND2,
+	NDIS_DUMMY_NOT_FOUND,
+	NSI_PROXY_NOT_FOUND,
+	NETIO_PATTERN_NOT_FOUND,
+	NSI_PROXY_PATTERN_NOT_FOUND,
+	NDIS_CALLBACK_THUNK_NOT_FOUND,
+	DXGKRNL_NOT_FOUND,
+	WIN32K_ATTACH_FAILED,
+	DXGPROCESS_NOT_FOUND,
+	DXGADAPTER_TABLE_NOT_FOUND,
+	DXGPROCESS_INVALID_MAXINDEX,
+	NVIDIA_DRIVER_NOT_FOUND,
+	NVIDIA_PATTERN_NOT_FOUND,
+	NVIDIA_LIST_NOT_VALID,
+	SMBIOS_FAILED_TO_SPOOF,
+	NIC_FAILED_TO_SPOOF
+};

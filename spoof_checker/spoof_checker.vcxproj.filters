@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ioctl_base.cpp">
+      <Filter>ioctl</Filter>
+    </ClCompile>
+    <ClCompile Include="smart_rcv_drive_data.cpp">
+      <Filter>ioctl</Filter>
+    </ClCompile>
+    <ClCompile Include="storage_query_property.cpp">
+      <Filter>ioctl</Filter>
+    </ClCompile>
+    <ClCompile Include="scsi_miniport.cpp">
+      <Filter>ioctl</Filter>
+    </ClCompile>
+    <ClCompile Include="ata_pass_through.cpp">
+      <Filter>ioctl</Filter>
+    </ClCompile>
+    <ClCompile Include="mac.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="color.hpp" />
+    <ClInclude Include="ioctl_base.hpp">
+      <Filter>ioctl</Filter>
+    </ClInclude>
+    <ClInclude Include="scsi_miniport.hpp">
+      <Filter>ioctl</Filter>
+    </ClInclude>
+    <ClInclude Include="mac.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ioctl">
+      <UniqueIdentifier>{9370d813-cbbd-4edd-9fac-6e80cc9f6dac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

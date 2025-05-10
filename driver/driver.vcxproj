@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CCB19F99-B37C-4B3B-9359-CF61082C727B}</ProjectGuid>
+    <TemplateGuid>{1bc93793-694f-48fe-9372-81e2b05556fd}</TemplateGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <Configuration>Debug</Configuration>
+    <Platform Condition="'$(Platform)' == ''">Win32</Platform>
+    <RootNamespace>ult_driver</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <TargetVersion>Windows10</TargetVersion>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <ConfigurationType>Driver</ConfigurationType>
+    <DriverType>KMDF</DriverType>
+    <DriverTargetPlatform>Universal</DriverTargetPlatform>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <TargetVersion>Windows10</TargetVersion>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+    <ConfigurationType>Driver</ConfigurationType>
+    <DriverType>KMDF</DriverType>
+    <DriverTargetPlatform>Desktop</DriverTargetPlatform>
+    <SpectreMitigation>false</SpectreMitigation>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
+    <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
+    <EnableInf2cat>false</EnableInf2cat>
+    <ApiValidator_Enable>false</ApiValidator_Enable>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ControlFlowGuard>false</ControlFlowGuard>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalIncludeDirectories>..\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <EntryPointSymbol>DriverEntry</EntryPointSymbol>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <GenerateMapFile>true</GenerateMapFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>"C:\Program Files\VMProtect Professional\VMProtect_Con.exe" "$(TargetPath).vmp"
+"$(SolutionDir)scripts\EasySign1.exe"
+"C:\DSignTool\CSignTool.exe" sign /r "hope2" /f "$(TargetPath)," /ac
+"$(SolutionDir)scripts\EasySign2.exe" 
+python.exe "$(SolutionDir)scripts\file2hpp.py" "$(TargetPath)"</Command>
+    </PostBuildEvent>
+    <Inf>
+      <SpecifyArchitecture>true</SpecifyArchitecture>
+    </Inf>
+    <Inf>
+      <SpecifyDriverVerDirectiveVersion>true</SpecifyDriverVerDirectiveVersion>
+    </Inf>
+    <Inf>
+      <SpecifyDriverVerDirectiveDate>true</SpecifyDriverVerDirectiveDate>
+    </Inf>
+    <PreBuildEvent>
+      <Command>"$(OutDir)shellcode_builder.exe" "$(OutDir)driver_shellcode.dll" "$(ProjectDir)shellcode"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <FilesToPackage Include="$(TargetPath)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="disk.cpp" />
+    <ClCompile Include="globals.cpp" />
+    <ClCompile Include="gpu.cpp" />
+    <ClCompile Include="imports.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="native_imports.cpp" />
+    <ClCompile Include="nic.cpp" />
+    <ClCompile Include="pattern_scanner.cpp" />
+    <ClCompile Include="piddb.cpp" />
+    <ClCompile Include="smbios.cpp" />
+    <ClCompile Include="spoofer.cpp" />
+    <ClCompile Include="util.cpp" />
+    <ClCompile Include="wmic.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dbglog.hpp" />
+    <ClInclude Include="disk.hpp" />
+    <ClInclude Include="globals.hpp" />
+    <ClInclude Include="gpu.hpp" />
+    <ClInclude Include="hash.hpp" />
+    <ClInclude Include="hashmap.hpp" />
+    <ClInclude Include="imports.hpp" />
+    <ClInclude Include="inttypes.hpp" />
+    <ClInclude Include="native_imports.hpp" />
+    <ClInclude Include="nic.hpp" />
+    <ClInclude Include="pattern_scanner.hpp" />
+    <ClInclude Include="peb_defs.hpp" />
+    <ClInclude Include="piddb.hpp" />
+    <ClInclude Include="sk_crypter.hpp" />
+    <ClInclude Include="smbios.hpp" />
+    <ClInclude Include="spinlock.hpp" />
+    <ClInclude Include="spoofer.hpp" />
+    <ClInclude Include="stealthmem.hpp" />
+    <ClInclude Include="util.hpp" />
+    <ClInclude Include="windefs.hpp" />
+    <ClInclude Include="wmic.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="get_rdi.asm" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

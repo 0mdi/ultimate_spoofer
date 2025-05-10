@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="imports">
+      <UniqueIdentifier>{3c172262-7ef1-4b4d-a159-9577e79444a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{1c3da9ff-0bb2-454b-a4bf-df414f0797de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="piddb">
+      <UniqueIdentifier>{1e7f972d-2e91-4788-b280-45f48f1a0e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stealth">
+      <UniqueIdentifier>{018a5c52-acb0-48fd-b356-c3696a6a05ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="spoofer">
+      <UniqueIdentifier>{4df6067f-f46e-4184-89d7-bbe99421c660}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="imports.cpp">
+      <Filter>imports</Filter>
+    </ClCompile>
+    <ClCompile Include="util.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="native_imports.cpp">
+      <Filter>imports</Filter>
+    </ClCompile>
+    <ClCompile Include="pattern_scanner.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="piddb.cpp">
+      <Filter>piddb</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="spoofer.cpp">
+      <Filter>spoofer</Filter>
+    </ClCompile>
+    <ClCompile Include="disk.cpp">
+      <Filter>spoofer</Filter>
+    </ClCompile>
+    <ClCompile Include="smbios.cpp">
+      <Filter>spoofer</Filter>
+    </ClCompile>
+    <ClCompile Include="wmic.cpp">
+      <Filter>spoofer</Filter>
+    </ClCompile>
+    <ClCompile Include="nic.cpp">
+      <Filter>spoofer</Filter>
+    </ClCompile>
+    <ClCompile Include="gpu.cpp">
+      <Filter>spoofer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="imports.hpp">
+      <Filter>imports</Filter>
+    </ClInclude>
+    <ClInclude Include="util.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="hash.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="inttypes.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="windefs.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="peb_defs.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern_scanner.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="native_imports.hpp">
+      <Filter>imports</Filter>
+    </ClInclude>
+    <ClInclude Include="dbglog.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.hpp" />
+    <ClInclude Include="piddb.hpp">
+      <Filter>piddb</Filter>
+    </ClInclude>
+    <ClInclude Include="sk_crypter.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="stealthmem.hpp">
+      <Filter>stealth</Filter>
+    </ClInclude>
+    <ClInclude Include="spinlock.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="spoofer.hpp">
+      <Filter>spoofer</Filter>
+    </ClInclude>
+    <ClInclude Include="disk.hpp">
+      <Filter>spoofer</Filter>
+    </ClInclude>
+    <ClInclude Include="hashmap.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="smbios.hpp">
+      <Filter>spoofer</Filter>
+    </ClInclude>
+    <ClInclude Include="wmic.hpp">
+      <Filter>spoofer</Filter>
+    </ClInclude>
+    <ClInclude Include="nic.hpp">
+      <Filter>spoofer</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu.hpp">
+      <Filter>spoofer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="get_rdi.asm">
+      <Filter>util</Filter>
+    </MASM>
+  </ItemGroup>
+</Project>
