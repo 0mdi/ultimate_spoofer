@@ -452,7 +452,6 @@ Instead of allocating a single, contiguous block of memory for all hook handlers
 This strategy offers several advantages:
 * **Reduced Signature Surface:** Dispersed, smaller allocations are less likely to match signatures looking for large, monolithic blocks of suspicious executable code.
 * **Mimicking Benign Allocations:** Small, isolated allocations can better blend in with legitimate system and driver memory usage patterns.
-* **Independent Management:** Allows for finer control over the lifecycle and permissions of each code segment if necessary, although typically these are allocated as executable or have their permissions changed post-allocation.
 
 The shellcode itself is designed to be position-independent or easily relocatable to function correctly from these dynamically allocated memory regions.
 
